@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,13 +34,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_20px_hsl(160_84%_39%_/_0.3)] group-hover:shadow-[0_0_30px_hsl(160_84%_39%_/_0.5)] transition-all duration-300">
-              <span className="font-display font-bold text-primary-foreground text-lg">M</span>
-            </div>
-            <span className="font-display font-semibold text-lg text-foreground">
-              The Mark Global
-            </span>
+          <a href="#" className="flex items-center group">
+            <img 
+              src={logo} 
+              alt="The Mark Global" 
+              className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:brightness-100 group-hover:invert-0"
+            />
           </a>
 
           {/* Desktop Navigation */}
