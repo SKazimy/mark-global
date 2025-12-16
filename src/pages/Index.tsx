@@ -1,13 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Services from "@/components/Services";
+import Portfolio from "@/components/Portfolio";
+import Testimonials from "@/components/Testimonials";
+import CTABanner from "@/components/CTABanner";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "The Mark Global | Digital Marketing Excellence";
+    
+    // Add meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "The Mark Global - Empowering your brand in the digital age. Premium digital marketing, branding, web development, and AI automation services.");
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content = "The Mark Global - Empowering your brand in the digital age. Premium digital marketing, branding, web development, and AI automation services.";
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-background">
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Portfolio />
+      <Testimonials />
+      <CTABanner />
+      <Contact />
+      <Footer />
+    </main>
   );
 };
 
