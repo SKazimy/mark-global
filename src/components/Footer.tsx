@@ -1,3 +1,5 @@
+import logo from "@/assets/logo.png";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -13,14 +15,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_15px_hsl(160_84%_39%_/_0.3)]">
-              <span className="font-display font-bold text-primary-foreground text-sm">M</span>
-            </div>
-            <span className="font-display font-semibold text-foreground">
-              The Mark Global
-            </span>
-          </div>
+          <a href="#" className="flex items-center">
+            <img 
+              src={logo} 
+              alt="The Mark Global" 
+              className="h-8 w-auto object-contain brightness-0 invert"
+            />
+          </a>
 
           {/* Links */}
           <div className="flex items-center gap-6">
