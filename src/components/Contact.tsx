@@ -45,17 +45,17 @@ const Contact = () => {
     {
       icon: MapPin,
       label: "Address",
-      value: "123 Digital Avenue, Tech City, TC 10001",
+      value: "Delhi, India",
     },
     {
       icon: Mail,
       label: "Email",
-      value: "hello@themarkglobal.com",
+      value: "info@themarkglobal.com",
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+91 88607 70099",
     },
   ];
 
