@@ -38,16 +38,19 @@ const Navbar = () => {
             <img 
               src={logo} 
               alt="The Mark Global" 
-              className="h-10 md:h-12 w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:brightness-100 group-hover:invert-0"
+              className="h-12 md:h-14 w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(160_84%_39%)] group-hover:brightness-100 group-hover:[filter:invert(1)_sepia(1)_saturate(5)_hue-rotate(100deg)]"
             />
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium relative group"
               >
                 {link.label}
@@ -81,7 +84,11 @@ const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   className="px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMobileMenuOpen(false);
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   {link.label}
                 </a>
