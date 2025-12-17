@@ -1,27 +1,23 @@
 # Use official Node.js LTS image
-FROM node:20-slim
 
-# Set working directory
+# Stage 1: Build the application
+FROM node:20-slim AS builder
 WORKDIR /app
-
-# Copy package files and install dependencies (including devDependencies)
 COPY package.json package-lock.json* bun.lockb* ./
 RUN npm install
-
-# Copy the rest of the app
 COPY . .
-
-# Build the Vite app
 RUN npm run build
-
-# Build the server (if using TypeScript)
 RUN npm run build:server || true
 
-# Remove devDependencies for production image
-RUN npm prune --omit=dev
-
-# Expose the port Cloud Run expects
+# Stage 2: Create the final production image
+FROM node:20-slim
+WORKDIR /app
+# Copy only the necessary production dependencies and the built application
+COPY package.json package-lock.json* bun.lockb* ./
+RUN npm install --production
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/server.js ./server.js
+COPY --from=builder /app/server.ts ./server.ts
+# If you need other static assets or files, copy them here as well
 EXPOSE 8080
-
-# Start the server
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]
