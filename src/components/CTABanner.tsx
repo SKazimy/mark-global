@@ -57,7 +57,7 @@ const CTABanner = () => {
             and discover how we can transform your brand.
           </p>
 
-          <Button variant="hero" size="xl" className="group">
+          <Button variant="hero" size="xl" className="group" onClick={() => import('@/lib/utils').then(m => m.scrollToContact())}>
             Schedule a Consultation
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>

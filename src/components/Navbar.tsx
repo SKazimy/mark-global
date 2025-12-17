@@ -34,12 +34,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center group">
-            <img 
-              src={logo} 
-              alt="The Mark Global" 
-              className="h-12 md:h-14 w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:drop-shadow-[0_0_8px_hsl(160_84%_39%)] group-hover:brightness-100 group-hover:[filter:invert(1)_sepia(1)_saturate(5)_hue-rotate(100deg)]"
-            />
+          <a href="#" className="flex items-center group p-1 rounded-md transition-colors duration-300">
+            <span className="logo-wrapper" style={{ ['--logo-url' as any]: `url(${logo})` }}>
+              <img 
+                src={logo} 
+                alt="The Mark Global" 
+                className="h-12 md:h-14 w-auto object-contain logo-default"
+              />
+            </span>
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -49,7 +51,7 @@ const Navbar = () => {
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  import('@/lib/utils').then((m) => m.scrollTo(link.href));
                 }}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-300 text-sm font-medium relative group"
               >
@@ -61,7 +63,7 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="glow" size="default">
+            <Button variant="glow" size="default" onClick={() => import('@/lib/utils').then(m => m.scrollToContact())}>
               Get Started
             </Button>
           </div>
@@ -87,14 +89,14 @@ const Navbar = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMobileMenuOpen(false);
-                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                    import('@/lib/utils').then((m) => m.scrollTo(link.href));
                   }}
                 >
                   {link.label}
                 </a>
               ))}
               <div className="px-4 pt-2">
-                <Button variant="glow" className="w-full">
+                <Button variant="glow" className="w-full" onClick={() => { setIsMobileMenuOpen(false); import('@/lib/utils').then(m => m.scrollToContact()); }}>
                   Get Started
                 </Button>
               </div>

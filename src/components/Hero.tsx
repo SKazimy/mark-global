@@ -49,14 +49,14 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{
-          animationDelay: "0.4s",
-          opacity: 0
-        }}>
-            <Button variant="hero" size="xl" className="group">
+            animationDelay: "0.4s",
+            opacity: 0
+          }}>
+            <Button variant="hero" size="xl" className="group" onClick={() => import('@/lib/utils').then(m => m.scrollToContact())}>
               Start Your Digital Journey
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
-            <Button variant="glass" size="xl">
+            <Button variant="glass" size="xl" onClick={() => import('@/lib/utils').then(m => m.scrollTo('#portfolio'))}>
               See Our Work
             </Button>
           </div>

@@ -163,7 +163,13 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground mb-1">{info.label}</div>
-                    <div className="text-foreground font-medium">{info.value}</div>
+                    <div className="text-foreground font-medium">
+                      {info.label === 'Email' ? (
+                        <a href={`mailto:${info.value}`} className="underline hover:text-primary transition-colors duration-200">{info.value}</a>
+                      ) : (
+                        info.value
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
