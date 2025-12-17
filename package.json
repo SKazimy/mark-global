@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --module NodeNext --moduleResolution nodenext --esModuleInterop --skipLibCheck --outDir dist server.ts",
+    "build": "vite build",
+    "build:server": "tsc --module NodeNext --moduleResolution nodenext --esModuleInterop --skipLibCheck --outDir dist server.ts",
     "start": "node dist/server.js",
     "start:pm2": "pm2 start dist/server.js --name mark-global --update-env",
     "stop:pm2": "pm2 stop mark-global && pm2 delete mark-global",
