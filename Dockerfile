@@ -20,4 +20,4 @@ COPY --from=builder /app/server.js ./server.js
 COPY --from=builder /app/server.ts ./server.ts
 # If you need other static assets or files, copy them here as well
 EXPOSE 8080
-CMD ["node", "dist/server.js"]
+CMD ["node", "server.js"]
