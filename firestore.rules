@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Contact form submissions - allow create from client, no read access
+    match /contacts/{contactId} {
+      // Allow anyone to create a contact submission
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message', 'createdAt'])
+                    && request.resource.data.name is string
+                    && request.resource.data.email is string
+                    && request.resource.data.message is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.email.size() > 0
+                    && request.resource.data.email.size() <= 254
+                    && request.resource.data.message.size() > 0
+                    && request.resource.data.message.size() <= 5000;
+      
+      // Only allow read/update/delete from server (admin SDK)
+      allow read, update, delete: if false;
+    }
+    
+    // Deny access to all other collections by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

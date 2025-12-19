@@ -6,11 +6,15 @@ import {
   Award,
   Globe,
   Bot,
+  Check,
+  Plus,
 } from "lucide-react";
+import { useServiceContext } from "@/contexts/ServiceContext";
 
 const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { selectedServices, toggleService } = useServiceContext();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,40 +99,88 @@ const Services = () => {
             From strategy to execution, we offer comprehensive digital marketing
             solutions tailored to your unique business goals.
           </p>
+          
+          {/* Selected services indicator */}
+          {selectedServices.length > 0 && (
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+              <span className="text-sm text-muted-foreground">
+                {selectedServices.length} service{selectedServices.length > 1 ? "s" : ""} selected
+              </span>
+              <span className="text-muted-foreground/50">•</span>
+              <a
+                href="#contact"
+                className="text-sm text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
+              >
+                Send inquiry →
+              </a>
+            </div>
+          )}
         </div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <div
-              key={service.title}
-              className={`group relative p-8 rounded-2xl bg-card/30 border border-border/50 backdrop-blur-sm overflow-hidden transition-all duration-700 hover:border-primary/40 hover:bg-card/50 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,_hsl(160_84%_39%_/_0.1)_0%,_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Icon */}
-              <div className="relative mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center group-hover:shadow-[0_0_30px_hsl(160_84%_39%_/_0.3)] transition-all duration-500">
-                  <service.icon className="w-7 h-7 text-primary" />
+          {services.map((service, index) => {
+            const isSelected = selectedServices.includes(service.title);
+            return (
+              <div
+                key={service.title}
+                onClick={() => toggleService(service.title)}
+                className={`group relative p-8 rounded-2xl bg-card/30 border backdrop-blur-sm overflow-hidden transition-all duration-700 cursor-pointer ${
+                  isSelected 
+                    ? "border-primary/60 bg-primary/5" 
+                    : "border-border/50 hover:border-primary/40 hover:bg-card/50"
+                } ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Selected/Add Indicator */}
+                <div className={`absolute top-4 right-4 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  isSelected 
+                    ? "bg-primary" 
+                    : "bg-muted/50 opacity-0 group-hover:opacity-100"
+                }`}>
+                  {isSelected ? (
+                    <Check className="w-4 h-4 text-primary-foreground" />
+                  ) : (
+                    <Plus className="w-4 h-4 text-muted-foreground" />
+                  )}
                 </div>
+
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,_hsl(160_84%_39%_/_0.1)_0%,_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Icon */}
+                <div className="relative mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center group-hover:shadow-[0_0_30px_hsl(160_84%_39%_/_0.3)] transition-all duration-500">
+                    <service.icon className="w-7 h-7 text-primary" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <h3 className="relative font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="relative text-muted-foreground leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Click hint */}
+                <p className={`relative text-xs mt-4 transition-opacity duration-300 ${
+                  isSelected 
+                    ? "text-primary/70 opacity-100" 
+                    : "text-muted-foreground/60 opacity-0 group-hover:opacity-100"
+                }`}>
+                  {isSelected 
+                    ? "Click to remove from inquiry" 
+                    : "Click to add to inquiry"}
+                </p>
+
+                {/* Bottom Border Glow */}
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-
-              {/* Content */}
-              <h3 className="relative font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                {service.title}
-              </h3>
-              <p className="relative text-muted-foreground leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Bottom Border Glow */}
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
