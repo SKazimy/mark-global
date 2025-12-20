@@ -2,15 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getFunctions } from "firebase/functions";
 
-// Your web app's Firebase configuration
-// Replace these with your actual Firebase config values
+// Firebase configuration
+// Note: These are safe to expose - Firebase uses security rules for protection
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAnPDsTVHIWRh7BlJjHUh_ZQ71_L843lpA",
+  authDomain: "markglobal-6b176.firebaseapp.com",
+  projectId: "markglobal-6b176",
+  storageBucket: "markglobal-6b176.firebasestorage.app",
+  messagingSenderId: "104493303920",
+  appId: "1:104493303920:web:abb9aa68231b9100df0cb5",
 };
 
 // Initialize Firebase
